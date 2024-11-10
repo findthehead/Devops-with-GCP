@@ -1,0 +1,89 @@
+# Python Bytecode files
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.pyd
+*.pyo
+
+# Virtual environment directories
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Pytest cache
+.pytest_cache/
+
+# Django stuff:
+*.log
+*.pot
+*.pyc
+__pycache__/
+db.sqlite3
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# PyCharm
+.idea/
+
+# VS Code
+.vscode/
+
+# MyPy
+.mypy_cache/
+
+# Pylint
+.pylint.d/
+
+# Coverage reports
+.coverage
+*.cover
+coverage.xml
+*.hypothesis/
+
+# Sphinx documentation
+docs/_build/
+
+# pipenv
+Pipfile.lock
+
+# poetry
+poetry.lock
+
+# Docker
+Dockerfile
+docker-compose.yml
+
+# Distribution / Packaging
+.Python
+build/
+dist/
+*.egg-info/
+*.eggs/
+.eggs/
+
+# PyInstaller
+#  PyInstaller will create a build folder and a dist folder
+#  with the packaged app.
+build/
+dist/
+
+# Cython debug symbols
+cython_debug/
+
+# IDE-specific files
+# JetBrains
+.idea/
+
+# macOS-specific files
+.DS_Store
+
+# Windows-specific files
+Thumbs.db

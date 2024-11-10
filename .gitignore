@@ -57,9 +57,7 @@ Pipfile.lock
 # poetry
 poetry.lock
 
-# Docker
-Dockerfile
-docker-compose.yml
+
 
 # Distribution / Packaging
 .Python

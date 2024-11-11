@@ -37,4 +37,4 @@ jobs:
       run: |
         helm package helm-oci
         helm registry login -u oauth2accesstoken --password string '${{ secrets.GCP_CREDENTIALS }}' us-east1-docker.pkg.dev
-        helm push helm-oci-0.1.0.tgz oci://us-east1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/github1/helm-chart1
+        helm push my-api-chart-0.1.0.tgz helm-oci-0.1.0.tgz oci://us-east1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/github1/helm-chart1

@@ -18,6 +18,9 @@ jobs:
       uses: 'google-github-actions/setup-gcloud@v2'
 
     - name: 'Use gcloud CLI'
-      run: |
-        gcloud auth configure-docker
-        gcloud builds submit --tag us-east1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/github1:latest --file ./Dockerfile
+    - uses: actions/checkout@v4
+      with:
+        sparse-checkout: Dockerfile
+        run: |
+          gcloud auth configure-docker
+          gcloud builds submit --tag us-east1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/github1:latest

@@ -24,3 +24,15 @@ jobs:
       run: |
         gcloud auth configure-docker
         gcloud builds submit --tag us-east1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/github1/flask_gcp:latest .
+  helm:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: 'Upload Helm charts'
+      uses: 'deliverybot/helm@v1'
+    - name: 'running helm commands'
+      run: |
+        helm package helm-oci/
+        helm registry login -u oauth2accesstoken --password string '${{ secrets.GCP_CREDENTIALS }}' https://us-east1-docker.pkg.dev
+        helm push helm-oci-0.1.0.tgz oci://us-east1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/github1/helm-chart1

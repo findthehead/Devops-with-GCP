@@ -1,9 +1,9 @@
 name: DevOps with GCP
 
-#on:
- # push:
-   # branches:
-     # - main  # Trigger workflow on push to the main branch
+on:
+  push:
+    branches:
+      - main  # Trigger workflow on push to the main branch
 
 jobs:
   build:
@@ -47,3 +47,27 @@ jobs:
         helm package helm-oci
         echo '${{ env.ACCESS_TOKEN }}' | helm registry login -u oauth2accesstoken --password-stdin https://us-east1-docker.pkg.dev
         helm push my-api-chart-0.1.0.tgz oci://us-east1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/github1/helm-chart1
+        
+  deploy: 
+   needs: [build, helm]
+   runs-on: ubuntu-latest
+   steps:
+    - uses: actions/checkout@v1
+    - name: 'Upload Helm charts'
+      uses: 'azure/setup-helm@v4'
+      env:
+        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+    - name: 'gcloud auth3'
+      uses: 'google-github-actions/auth@v2'
+      with:
+        credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+        run: |
+         gcloud container clusters create --zone us-east1 chart-cluster
+         gcloud container clusters get-credentials --zone us-east1 chart-cluster
+         gcloud auth configure-docker us-east1-docker.pkg.dev --quiet
+         export ACCESS_TOKEN=$(gcloud auth print-access-token)
+         echo "ACCESS_TOKEN=$ACCESS_TOKEN" >> $GITHUB_ENV  # Persisting ACCESS_TOKEN to environment for next steps
+    - name: 'Deploying app'
+      run: |
+        echo '${{ env.ACCESS_TOKEN }}' | helm registry login -u oauth2accesstoken --password-stdin https://us-east1-docker.pkg.dev
+        helm install my-api-chart oci://us-east1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/github1/helm-chart1/my-api-chart --version 0.1.0

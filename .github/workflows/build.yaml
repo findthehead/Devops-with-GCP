@@ -39,6 +39,7 @@ jobs:
         credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
     - name: 'fetching access token'
       run: |
+          gcloud auth configure-docker us-east1-docker.pkg.dev --quiet
           export ACCESS_TOKEN=$(gcloud auth print-access-token)
     - name: 'running helm commands'
       run: |

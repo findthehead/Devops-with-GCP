@@ -1,26 +1,3 @@
-Skip to content
-Navigation Menu
-findthehead
-/
-Devops-with-GCP
-
-Type / to search
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-7
-Insights
-Settings
-DevOps with GCP
-dockerbuild4 #6
-Jobs
-Run details
-Workflow file for this run
-.github/workflows/build.yaml at a50169e
 name: DevOps with GCP
 
 on:

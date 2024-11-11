@@ -35,6 +35,6 @@ jobs:
         GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
     - name: 'running helm commands'
       run: |
-        helm package helm-oci -d . -o helm-oci-0.1.0.tgz
+        helm package helm-oci
         helm registry login -u oauth2accesstoken --password string '${{ secrets.GCP_CREDENTIALS }}' https:///us-east1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/github1
         helm push helm-oci-0.1.0.tgz oci://us-east1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/github1/helm-chart1

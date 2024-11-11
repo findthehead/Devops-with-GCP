@@ -5,10 +5,10 @@
 replicaCount: 1
 
 image:
-  repository: us-east1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/github1/flask_gcp:latest
+  repository: us-east1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/github1/flask_gcp
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "latest"
 
 imagePullSecrets: []
 nameOverride: ""

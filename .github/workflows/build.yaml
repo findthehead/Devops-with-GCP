@@ -30,7 +30,9 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: 'Upload Helm charts'
-      uses: 'deliverybot/helm@v1'
+      uses: 'azure/setup-helm@v4'
+      env:
+        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
     - name: 'running helm commands'
       run: |
         helm package helm-oci/

@@ -18,7 +18,7 @@ jobs:
       uses: 'google-github-actions/setup-gcloud@v2'
 
     - name: 'Use gcloud CLI'
-    - uses: actions/checkout@v4
+      uses: actions/checkout@v4
       with:
         sparse-checkout: Dockerfile
         run: |

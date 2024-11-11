@@ -8,19 +8,28 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    
     steps:
-    - id: 'auth'
-      uses: 'google-github-actions/auth@v2'
-      with:
-        credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+      # Step 1: Authenticate with GCP
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v2'
+        with:
+          credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
 
-    - name: 'Set up Cloud SDK'
-      uses: 'google-github-actions/setup-gcloud@v2'
+      # Step 2: Set up the Cloud SDK
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v2'
 
-    - name: 'Use gcloud CLI'
-      uses: actions/checkout@v4
-      with:
-        sparse-checkout: Dockerfile
+      # Step 3: Checkout code (if needed for context)
+      - name: 'Checkout Repository'
+        uses: actions/checkout@v4
+
+      # Step 4: Configure Docker to use GCP registry
+      - name: 'Configure Docker with gcloud'
         run: |
           gcloud auth configure-docker
+
+      # Step 5: Build and push Docker image to GCP Artifact Registry
+      - name: 'Build and Push Docker Image'
+        run: |
           gcloud builds submit --tag us-east1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/github1:latest .

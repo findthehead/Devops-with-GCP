@@ -61,10 +61,11 @@ jobs:
       uses: 'google-github-actions/auth@v2'
       with:
         credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
-        run: |
-         gcloud container clusters describe chart-cluster || \
-         gcloud container clusters create --zone us-east1 chart-cluster
-         gcloud container clusters get-credentials --zone us-east1 chart-cluster
+    - name: 'provisioning cluster'
+      run: |
+       gcloud container clusters describe chart-cluster || \
+       gcloud container clusters create --zone us-east1 chart-cluster
+       gcloud container clusters get-credentials --zone us-east1 chart-cluster
     - name: 'Deploying app'
       run: |
         echo '${{ env.ACCESS_TOKEN }}' | helm registry login -u oauth2accesstoken --password-stdin https://us-east1-docker.pkg.dev

@@ -68,8 +68,7 @@ jobs:
        gcloud container clusters get-credentials chart-cluster --zone us-east1
     - name: 'auth plugin instalation'
       run: |
-       gcloud components install gke-gcloud-auth-plugin
-       apt-get install google-cloud-sdk-gke-gcloud-auth-plugin
+       apt-get install google-cloud-cli-gke-gcloud-auth-plugin
     
     - name: 'Deploying app'
       run: |

@@ -67,9 +67,7 @@ jobs:
        gcloud container clusters create chart-cluster --zone us-east1 --disk-size 50GB --num-nodes=2
        gcloud container clusters get-credentials chart-cluster --zone us-east1
     - name: 'auth plugin instalation'
-      run: |
-       sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin
-    
+      uses: 'simenandre/setup-gke-gcloud-auth-plugin@v1'
     - name: 'Deploying app'
       run: |
         echo '${{ env.ACCESS_TOKEN }}' | helm registry login -u oauth2accesstoken --password-stdin https://us-east1-docker.pkg.dev

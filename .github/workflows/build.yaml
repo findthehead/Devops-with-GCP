@@ -63,8 +63,8 @@ jobs:
         credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
     - name: 'provisioning cluster'
       run: |
-       gcloud container clusters describe chart-cluster || \
-       gcloud container clusters create --zone us-east1 chart-cluster
+       gcloud container clusters describe --zone us-east1 chart-cluster || \
+       gcloud container clusters create --zone us-east1 chart-cluster --disk-size 50GB
        gcloud container clusters get-credentials --zone us-east1 chart-cluster
     - name: 'Deploying app'
       run: |

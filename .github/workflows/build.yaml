@@ -64,7 +64,7 @@ jobs:
     - name: 'provisioning cluster'
       run: |
        gcloud container clusters describe --zone us-east1 chart-cluster || \
-       gcloud container clusters create --zone us-east1 chart-cluster --disk-size 50GB --max-nodes-per-pool=3
+       gcloud container clusters create --zone us-east1 chart-cluster --disk-size 50GB node-pool-3
        gcloud container clusters get-credentials --zone us-east1 chart-cluster
     - name: 'Deploying app'
       run: |

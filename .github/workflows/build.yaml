@@ -64,7 +64,7 @@ jobs:
     - name: 'provisioning cluster'
       run: |
        gcloud container clusters describe --zone us-east1 chart-cluster || \
-       gcloud container clusters create --zone us-east1 chart-cluster --disk-size 50GB --num-nodes 3
+       gcloud container clusters create --zone us-east1 chart-cluster --disk-size 50GB --num-nodes 3 --enable-ip-alias --min-nodes 1 --max-nodes 5 --node-machine-type n1-standard-2 --address ""
        gcloud container clusters get-credentials --zone us-east1 chart-cluster
     - name: 'Deploying app'
       run: |

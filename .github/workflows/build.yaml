@@ -65,6 +65,8 @@ jobs:
       run: |
        gcloud container clusters describe --zone us-east1 chart-cluster || \
        gcloud container clusters create chart-cluster --zone us-east1 --disk-size 50GB --num-nodes=2
+       gcloud components install gke-gcloud-auth-plugin
+       gke-gcloud-auth-plugin --version
        gcloud container clusters get-credentials --zone us-east1 chart-cluster
     - name: 'Deploying app'
       run: |

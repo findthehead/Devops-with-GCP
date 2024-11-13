@@ -12,6 +12,6 @@
 ```bash
 
 git clone https://github.com/findthehead/Devops-with-GCP.git
-nano Devops-with-GCP.git/.github/workflows/build.yaml
+nano Devops-with-GCP/.github/workflows/build.yaml
 
 ```
